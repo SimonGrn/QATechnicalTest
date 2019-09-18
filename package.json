@@ -1,0 +1,17 @@
+{
+  "name": "technical-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tests/test.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha tests/test.js"
+  },
+  "keywords": [],
+  "author": "Simon Garny",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "puppeteer": "^1.20.0"
+  }
+}
