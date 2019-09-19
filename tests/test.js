@@ -1,23 +1,55 @@
 const puppeteer = require('puppeteer');
 const { expect } = require('chai');
+let page;
 
-// puppeteer options
-const opts = {
-    headless: false,
-    slowMo: 100,
-    timeout: 10000
-};
+describe('technical test', async function() {
+    before(async function () {
+        browser = await puppeteer.launch({
+            headless: false,
+            slowMo: 25,
+            timeout: 0,
+            args: ['--start-maximized', '--no-sandbox', '--lang=fr-FR'],
+            defaultViewport: {
+                width: 1680,
+                height: 900,
+            }
+        });
+    });
 
-// expose variables
-before (async function () {
-    global.expect = expect;
-    global.browser = await puppeteer.launch(opts);
+    it('open browser, connect, verify title', async function() {
+        page = await browser.newPage();
+        await page.goto('http://localhost/prestashop/admin-dev');
+        await page.type('#email', 'demo@prestashop.com');
+        await page.type('#passwd', 'prestashop_demo');
+        await page.click('#submit_login');
+        await page.waitForNavigation({waitUntil: 'networkidle0'});
+        const pageTitle = await page.title();
+        await expect(pageTitle).to.contains('Dashboard');
+    });
+
+    it ('check the first product is correct', async function() {
+        if (await elementVisible(page, 'button.onboarding-button-shut-down')) {
+            await page.click('button.onboarding-button-shut-down');
+            await page.waitForSelector('a.onboarding-button-stop', {visible: true});
+            await page.click('a.onboarding-button-stop');
+        }
+        await page.click('#subtab-AdminCatalog>a');
+        await page.click('#subtab-AdminProducts>a');
+        await page.waitForNavigation({waitUntil: 'networkidle0'});
+        const nbrLines = await page.$$(`${this.productListForm} table tbody tr`).length;
+        await expect(nbrLines).to.be.equal(19);
+    });
+
+    after(async function () {
+        await browser.close();
+    });
 });
 
-// close browser and reset global variables
-after (function () {
-    browser.close();
-
-    global.browser = globalVariables.browser;
-    global.expect = globalVariables.expect;
-});
+async function elementVisible(page, selector, timeout = 10) {
+    try {
+        await page.waitForSelector(selector, {visible: true, timeout});
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
