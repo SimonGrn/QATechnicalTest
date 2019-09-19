@@ -38,8 +38,6 @@ describe('technical test', async function() {
             page.waitForNavigation({waitUntil: 'networkidle0'}),
             page.click('#subtab-AdminProducts>a')
         ]);
-        //await page.click('#subtab-AdminProducts>a');
-        //await page.waitForNavigation({waitUntil: 'networkidle0'});
         const nbrLines = await page.$$('#product_catalog_list table tbody tr').length;
         await expect(nbrLines).to.be.equal(19);
     });
