@@ -2,10 +2,10 @@
   "name": "technical-test",
   "version": "1.0.0",
   "description": "",
-  "main": "tests/test.js",
+  "main": "tests/test_working.js",
   "scripts": {
     "tech_test": "./node_modules/mocha/bin/mocha tests/test.js",
-    "tech_work": "./node_modules/mocha/bin/mocha tests/test_working.js"
+    "tech_work": "node_modules/mocha/bin/mocha tests/test_working.js"
   },
   "keywords": [],
   "author": "Simon Garny",

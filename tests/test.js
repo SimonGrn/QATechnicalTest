@@ -9,7 +9,7 @@ describe('technical test', async function() {
         browser = await puppeteer.launch({
             headless: false,
             slowMo: 250,
-            timeout: 1000,
+            timeout: 500,
             args: ['--no-sandbox', '--lang=en-EN'],
             defaultViewport: {
                 width: 600,

@@ -17,7 +17,7 @@ describe('Connect to BO and verify the list of products', async function() {
             headless: false,
             slowMo: 10,
             timeout: 0,
-            args: ['--start-maximized', '--no-sandbox', '--lang=fr-FR'],
+            args: ['--start-maximized', '--no-sandbox', '--lang=en-EN'],
             defaultViewport: {
                 width: 1680,
                 height: 900,
