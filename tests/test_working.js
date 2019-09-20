@@ -1,4 +1,4 @@
-const {puppeteer} = require('puppeteer');
+const puppeteer = require('puppeteer');
 const {expect} = require('chai');
 
 //data used in this test
@@ -15,7 +15,7 @@ describe('Connect to BO and verify the list of products', async function() {
     before(async function () {
         browser = await puppeteer.launch({
             headless: false,
-            slowMo: 25,
+            slowMo: 10,
             timeout: 0,
             args: ['--start-maximized', '--no-sandbox', '--lang=fr-FR'],
             defaultViewport: {
