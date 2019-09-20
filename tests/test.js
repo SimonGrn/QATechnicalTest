@@ -9,7 +9,7 @@ describe('technical test', async function() {
         browser = await puppeteer.launch({
             headless: false,
             slowMo: 250,
-            timeout: 0,
+            timeout: 1000,
             args: ['--no-sandbox', '--lang=en-EN'],
             defaultViewport: {
                 width: 600,
@@ -18,29 +18,21 @@ describe('technical test', async function() {
         });
     });
 
-    it('tests page', async function() {
+    it('first test', async function() {
         page = await browser.newPage();
         await page.goto('http://localhost/prestashop/admin-dev');
         await page.type('#email', 'demo@prestashop.com');
         await page.type('#passwd', 'prestashop_demo');
         await page.click('#submit_login');
         await page.waitFor(5000);
-        const pageTitle = await page.title();
-        await expect(pageTitle).to.be.equal('Dashboard');
     });
 
-    it ('first', async function() {
+    it('second test', async function() {
         await page.click('button.onboarding-button-shut-down');
         await page.click('#subtab-AdminCatalog');
-        await Promise.all([
-            page.waitForNavigation({waitUntil: 'networkidle0'}),
-            page.click('#subtab-AdminProducts')
-        ]);
+        await page.click('#subtab-AdminProducts');
+        await page.waitFor(5000);
         const nbrLines = (await page.$$('#product_catalog_list table tbody tr')).size();
         await expect(nbrLines).to.be.equal(20);
-    });
-
-    after(async function () {
-
     });
 });
