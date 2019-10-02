@@ -12,7 +12,7 @@ npm install
 Imagine you're a senior QA Automation Engineer. You've been monitoring a newcomer in your team, a junior QA Engineer who
 wants to become an expert in Automation.
 
-He hands you his first test: `test.js`.
+He hands you his first test: [test.js](test.js).
 
 :thinking: What are your remarks ?
 
