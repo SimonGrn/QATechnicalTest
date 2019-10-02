@@ -1,6 +1,6 @@
 # Technical test
 
-##How to install
+## How to install
 ```bash
 npm install
 ```
@@ -19,4 +19,4 @@ He hands you his first test: [test.js](test.js).
 ## Correction
 
 Please fork this project and propose a PR with your corrections and remarks. We will then look at it and confront it 
-with `test_working.js` which is our implementation.
+with `test_working.js` which is our own implementation.

@@ -58,6 +58,14 @@ describe('Connect to BO and verify the list of products', async function() {
         const nbrLines = (await page.$$('#product_catalog_list table tbody tr')).length;
         await expect(nbrLines).to.be.equal(19);
     });
+
+    //Second test: go to FO, navigate to the first product and add it to the cart, check modal is opened
+    it ('should go to the FO, select first product and add it to cart', async function() {
+        await page.goto(URL_FO);
+        await page.click('article:nth-child(1) a.thumbnail');
+        await page.click('.btn.add-to-cart');
+        await expect(await isElementVisible(page, '#blockcart-modal', 2000)).to.be.true;
+    });
 });
 
 //method to check if an element is visible
