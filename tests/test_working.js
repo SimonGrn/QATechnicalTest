@@ -25,6 +25,11 @@ describe('Connect to BO and verify the list of products', async function() {
         });
     });
 
+    //executed after the test: close the browser
+    after(async function () {
+        await browser.close();
+    });
+
     //First test: open the browser, go to the BO, login, and verify we're on the correct page
     it('should open the browser and login to the BO', async function() {
         page = await browser.newPage();
@@ -52,10 +57,6 @@ describe('Connect to BO and verify the list of products', async function() {
         ]);
         const nbrLines = (await page.$$('#product_catalog_list table tbody tr')).length;
         await expect(nbrLines).to.be.equal(19);
-    });
-
-    after(async function () {
-        await browser.close();
     });
 });
 
