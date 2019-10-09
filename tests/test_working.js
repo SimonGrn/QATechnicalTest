@@ -4,10 +4,19 @@ const {expect} = require('chai');
 //data used in this test
 const LOGIN = process.env.LOGIN || 'demo@prestashop.com';
 const PASSWORD = process.env.PASSWORD || 'prestashop_demo';
-const URL_BO = process.env.URL_BO || 'http://localhost/prestashop/admin-dev';
+const URL_FO = process.env.URL_FO || 'http://localhost/prestashop';
+const URL_BO = process.env.URL_BO || `${URL_FO}/admin-dev`;
 
 //variables
 let page;
+let products = [
+  'Customizable mug',
+  'Hummingbird notebook',
+  'Brown bear notebook',
+  'Mountain fox Fnotebook',
+  'Pack Mug + Framed poster',
+  'Hummingbird - Vector graphics'
+];
 
 
 describe('Connect to BO and verify the list of products', async function() {
@@ -59,7 +68,21 @@ describe('Connect to BO and verify the list of products', async function() {
         await expect(nbrLines).to.be.equal(19);
     });
 
-    //Second test: go to FO, navigate to the first product and add it to the cart, check modal is opened
+    //Third test: go to the product page and check that the 6 first products are the correct ones
+    it ('should check the list of products is correct', async function() {
+        let productTableLines = await page.evaluate(() => {
+            const trs = Array.from(document.querySelectorAll('table.table.product tbody tr'));
+            return trs.map(tr => tr.querySelector('td:nth-child(4)').innerText);
+        });
+        productTableLines = productTableLines.slice(0, 6);
+        await expect(productTableLines.length).to.be.equal(6);
+        //comparison item by item
+        await products.forEach(function(product) {
+            expect(productTableLines.indexOf(product), 'Element '+product+' to be in list').to.be.not.equal(-1);
+        });
+    });
+
+    //Fourth test: go to FO, navigate to the first product and add it to the cart, check modal is opened
     it ('should go to the FO, select first product and add it to cart', async function() {
         await page.goto(URL_FO);
         await page.click('article:nth-child(1) a.thumbnail');
