@@ -13,7 +13,7 @@ let products = [
   'Customizable mug',
   'Hummingbird notebook',
   'Brown bear notebook',
-  'Mountain fox Fnotebook',
+  'Mountain fox notebook',
   'Pack Mug + Framed poster',
   'Hummingbird - Vector graphics'
 ];
@@ -76,7 +76,7 @@ describe('Connect to BO and verify the list of products', async function() {
         });
         productTableLines = productTableLines.slice(0, 6);
         await expect(productTableLines.length).to.be.equal(6);
-        //comparison item by item
+        //item by item comparison
         await products.forEach(function(product) {
             expect(productTableLines.indexOf(product), 'Element '+product+' to be in list').to.be.not.equal(-1);
         });
