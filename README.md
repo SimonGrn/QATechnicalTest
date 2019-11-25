@@ -5,7 +5,7 @@
 npm install
 ```
 
-:warning: Make sure to have a working version of PrestaShop 1.7.6.
+:warning: Make sure to have a working version of PrestaShop 1.7.7.
 
 ## How this works
 
