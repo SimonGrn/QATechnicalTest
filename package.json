@@ -4,8 +4,7 @@
   "description": "",
   "main": "tests/test_working.js",
   "scripts": {
-    "tech_test": "./node_modules/mocha/bin/mocha tests/test.js",
-    "tech_work": "node_modules/mocha/bin/mocha tests/test_working.js"
+    "tech_test": "./node_modules/mocha/bin/mocha tests/test.js"
   },
   "keywords": [],
   "author": "Simon Garny",

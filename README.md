@@ -18,5 +18,4 @@ He hands you his first test: [test.js](tests/test.js).
 
 ## Correction
 
-Please fork this project and propose a PR with your corrections and remarks. We will then look at it and confront it 
-with `test_working.js` which is our own implementation.
+Please fork this project and propose a PR with your corrections and remarks. 
