@@ -19,3 +19,5 @@ He hands you his first test: [test.js](tests/test.js).
 ## Correction
 
 Please fork this project and propose a PR with your corrections and remarks. 
+
+DO NOT DIRECTLY PUSH on this repository.
