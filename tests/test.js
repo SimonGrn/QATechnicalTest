@@ -1,13 +1,13 @@
 //node node_modules/mocha/bin/mocha tests/test.js --timeout 0
 
-const puppeteer = require('puppeteer');
+const chromium = require('playwright')['chromium'];
 const { expect } = require('chai');
 let browser;
 let page;
 
 describe('test for PrestaShop', async function() {
     it('first test', async function() {
-        browser = await puppeteer.launch({
+        browser = await chromium.launch({
             headless: false,
             slowMo: 250,
             timeout: 5000,
@@ -22,13 +22,13 @@ describe('test for PrestaShop', async function() {
         await page.type('#email', 'demo@prestashop.com');
         await page.type('#passwd', 'prestashop_demo');
         await page.click('#submit_login');
-        await page.waitFor(5000);
+        await page.waitForTimeout(5000);
         await console.log('Check page title is correct : '+ await page.title());
         // the onboarding modal only appears once, so there will be an error after the first time the test is run
         await page.click('button.onboarding-button-shut-down');
         await page.click('#subtab-AdminCatalog');
         await page.click('#subtab-AdminProducts');
-        await page.waitFor(5000);
+        await page.waitForTimeout(5000);
         const nbrLines = (await page.$$('#product_catalog_list table tbody tr')).length;
         await console.log(nbrLines+' should be equal to 19');
         const product1 = await page.$eval('#product_catalog_list > div:nth-child(2) > div > div > table > tbody > tr:nth-child(1) > td:nth-child(4) > a', e => e.innerText);
@@ -47,7 +47,7 @@ describe('test for PrestaShop', async function() {
     });
 
     it('second test', async function() {
-        browser = await puppeteer.launch({
+        browser = await chromium.launch({
             headless: false,
             slowMo: 250,
             timeout: 5000,
@@ -60,12 +60,12 @@ describe('test for PrestaShop', async function() {
         page = await browser.newPage();
         await page.goto('http://localhost/prestashop/');
         await page.click('#content > section > div > div:nth-child(1) > article > div > a');
-        await page.waitFor(5000);
+        await page.waitForTimeout(5000);
         await page.click('#add-to-cart-or-refresh > div.product-add-to-cart > div > div.add > button');
-        await page.waitFor(5000);
-        const modal = await page.waitFor('#blockcart-modal[style="display: block;"]');
+        await page.waitForTimeout(5000);
+        const modal = await page.waitForTimeout('#blockcart-modal[style="display: block;"]');
         await console.log('modal is visible if this is not equal to null : ' + modal);
-        await page.waitFor(500);
+        await page.waitForTimeout(500);
         await browser.close();
     });
 });
